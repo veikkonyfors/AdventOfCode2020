@@ -1,0 +1,19 @@
+pluginManagement {
+    repositories {
+        gradlePluginPortal()
+        google()
+        mavenCentral()
+    }
+}
+dependencyResolutionManagement {
+    repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
+    repositories {
+        google()
+        mavenCentral()
+    }
+}
+rootProject.name = "AdventOfCode2020"
+include ':app'
+include ':app:advent2020day1sumandmultiply'
+include ':app:advent2020day2passwordcheck'
+include ':app:advent2020day2passwordcheck2'
