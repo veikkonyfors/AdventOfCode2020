@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">advent2020day3traversetrees</string>
+    <string name="btn_traverse">Traverse</string>
+</resources>
