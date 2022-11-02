@@ -1,3 +1,5 @@
 # Advent of Code 2020 day 2
 
-Solutions of day 2 second puzzle.
+Solution for day's second puzzle.
+
+One needs to store puzzle input into  File(applicationContext.filesDir, "adv2020_password_2_check.txt").

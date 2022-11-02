@@ -15,5 +15,9 @@ Day 1 I did with Kotlin Playground, thus no solution here.
 
 ### advent2020day2passwordcheck
 First part of day 2 puzzle
+
 ### advent2020day2passwordcheck
 Second part of day 2 puzzle
+
+### advent2020day3traversetrees
+First part of day 3 puzzle
