@@ -1,4 +1,4 @@
-class CheckPassword(var password:String) {
+class PasswordChecker(var password:String) {
     var  c:Char=' '
     var  min:Int=-1
     var  max:Int=-1
@@ -14,7 +14,7 @@ class CheckPassword(var password:String) {
     }
 
     fun isOk():Boolean{
-        var occurrences=password.count { it==c }
+        val occurrences=password.count { it==c }
 
         when (occurrences) {
             in min .. max -> return true

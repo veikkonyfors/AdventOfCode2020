@@ -5,7 +5,6 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.TextView
 import com.google.android.material.button.MaterialButton
-import com.viware.advent2020day2passwordcheck2.R
 import java.io.File
 
 private const val TAG = "MainActivity"
@@ -20,10 +19,10 @@ class MainActivity : AppCompatActivity() {
             val file = File(applicationContext.filesDir, "adv2020_password_2_check.txt")
             Log.i(TAG,"In checkButton setOnClickListener lambda, file.absolutePath: "+file.absolutePath)
             val listOfContents:List<String> = file.readLines()
-            var valid:Int=0
+            var valid=0
 
             for(line in listOfContents) {
-                var checkPassword: CheckPassword = CheckPassword(line)
+                val checkPassword= PasswordChecker(line)
                 //Log.i(TAG,"In checkButton setOnClickListener lambda, listOfContents[$i]: "+listOfContents[i++]+" "+checkPassword.isOk())
                 if(checkPassword.isOk()) valid++
             }
@@ -34,7 +33,7 @@ class MainActivity : AppCompatActivity() {
 
     }
 
-    class CheckPassword(var password:String) {
+    class PasswordChecker(var password:String) {
         var  c:Char=' '
         var  min:Int=-1
         var  max:Int=-1
