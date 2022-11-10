@@ -139,4 +139,16 @@ class PassportTest {
         assertFalse(HairColor("#dab22799").isValid())
         assertFalse(HairColor("#dab22g").isValid())
     }
+
+    @Test
+    fun testEyeColor(){
+        assertFalse(Passport("hgt:150cm ecl:zzz eyr:2030 hcl:#74454a iyr:2020 pid:3556412378 byr:2002").isValid())
+    }
+
+    @Test
+    fun testPid(){
+        assertFalse(Passport("hgt:150cm ecl:brn eyr:2030 hcl:#74454a iyr:2020 pid:3556412378 byr:2002").isValid())
+        assertFalse(Passport("hgt:150cm ecl:brn eyr:2030 hcl:#74454a iyr:2020 pid:35564123a byr:2002").isValid())
+
+    }
 }

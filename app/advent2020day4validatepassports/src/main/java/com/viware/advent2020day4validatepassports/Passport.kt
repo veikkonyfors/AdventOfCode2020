@@ -13,7 +13,7 @@ class  Passport constructor(val credentials:String) {
     val passportID: Int? = getCredential("pid").toIntOrNull()
     val countryID: Int? = getCredential("cid").toIntOrNull()
 
-    val listOfTypes=listOf("byr","iyr","eyr","hgt","hcl")//,"ecl","pid","cid")
+    val listOfTypes=listOf("byr","iyr","eyr","hgt","hcl","ecl","pid")//,"cid")
 
     val byrRange=(1920..2002)
     val iyrRange=(2010..2020)
@@ -45,7 +45,8 @@ class  Passport constructor(val credentials:String) {
                 "eyr" -> if( ! eyrRange.contains(expirationYear)) return false.also{println("eyr failed")}
                 "hgt" -> if( ! Height(height,heightInRange,heightCmRange).isValid()) return false.also{println("hgt failed")}
                 "hcl" -> if( ! HairColor(hairColor).isValid()) return false.also{println("hcl failed")}
-                "ecl" -> if( ! validEyeColors.contains(it)) return false.also{println("ecl failed")}
+                "ecl" -> if( ! validEyeColors.contains(eyeColor)) return false.also{println("ecl failed")}
+                "pid" -> if(it.filter({it -> !it.isDigit()}).isNotEmpty() || it.length!=9) return false.also{println("pid failed")}
             }
         }
         return true
