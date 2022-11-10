@@ -20,4 +20,4 @@ First part of day 2 puzzle
 Second part of day 2 puzzle
 
 ### advent2020day3traversetrees
-First part of day 3 puzzle
+Both parts of day 3 puzzle
