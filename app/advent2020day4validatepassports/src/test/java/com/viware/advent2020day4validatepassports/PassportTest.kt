@@ -126,10 +126,12 @@ class PassportTest {
     }
 
     @Test
-    fun testIsValidType(){
+    fun testIsValidAll(){
         val listOfCredentials=
-            CredentialBuilder(listOfInValidCredentialLines).buildCredentials()
-                assertTrue(Passport(listOfCredentials[0]).isValid("byr"))
+            CredentialBuilder(listOfValidCredentialLines).buildCredentials().forEach{
+                println(it)
+                assert(Passport(it).isValid())
+            }
     }
 
     @Test

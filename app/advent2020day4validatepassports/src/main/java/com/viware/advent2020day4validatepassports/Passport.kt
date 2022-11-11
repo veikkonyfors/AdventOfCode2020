@@ -10,7 +10,7 @@ class  Passport constructor(val credentials:String) {
     val height: String = getCredential("hgt")
     val hairColor: String = getCredential("hcl")
     val eyeColor: String = getCredential("ecl")
-    val passportID: Int? = getCredential("pid").toIntOrNull()
+    val passportID: String = getCredential("pid")
     val countryID: Int? = getCredential("cid").toIntOrNull()
 
     val listOfTypes=listOf("byr","iyr","eyr","hgt","hcl","ecl","pid")//,"cid")
@@ -40,23 +40,16 @@ class  Passport constructor(val credentials:String) {
     fun isValid():Boolean{
         listOfTypes.forEach{
             when(it){
-                "byr" -> if( ! byrRange.contains(birthYear)) return false.also{println("byr failed")}
-                "iyr" -> if( ! iyrRange.contains(issueYear)) return false.also{println("iyr failed")}
-                "eyr" -> if( ! eyrRange.contains(expirationYear)) return false.also{println("eyr failed")}
-                "hgt" -> if( ! Height(height,heightInRange,heightCmRange).isValid()) return false.also{println("hgt failed")}
-                "hcl" -> if( ! HairColor(hairColor).isValid()) return false.also{println("hcl failed")}
-                "ecl" -> if( ! validEyeColors.contains(eyeColor)) return false.also{println("ecl failed")}
-                "pid" -> if(it.filter({it -> !it.isDigit()}).isNotEmpty() || it.length!=9) return false.also{println("pid failed")}
+                "byr" -> if( ! byrRange.contains(birthYear)) return false// .also{println("byr failed")}
+                "iyr" -> if( ! iyrRange.contains(issueYear)) return false// .also{println("iyr failed")}
+                "eyr" -> if( ! eyrRange.contains(expirationYear)) return false// .also{println("eyr failed")}
+                "hgt" -> if( ! Height(height,heightInRange,heightCmRange).isValid()) return false// .also{println("hgt failed")}
+                "hcl" -> if( ! HairColor(hairColor).isValid()) return false// .also{println("hcl failed")}
+                "ecl" -> if( ! validEyeColors.contains(eyeColor)) return false// .also{println("ecl failed")}
+                "pid" -> if(passportID.filter {it -> !it.isDigit()}.isNotEmpty() || passportID.length!=9) return false// .also{println("pid failed")}
             }
         }
         return true
-    }
-
-    fun isValid(type:String):Boolean{
-        when(type){
-            "byr" -> {return byrRange.contains(getCredential(type).toInt())}
-        }
-        return false
     }
 
     fun isOk():Boolean{

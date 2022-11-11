@@ -21,3 +21,6 @@ Second part of day 2 puzzle
 
 ### advent2020day3traversetrees
 Both parts of day 3 puzzle
+
+### advent2020day4validatepassports
+Both parts of day 4 puzzle
