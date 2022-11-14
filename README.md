@@ -24,3 +24,6 @@ Both parts of day 3 puzzle
 
 ### advent2020day4validatepassports
 Both parts of day 4 puzzle
+
+### advent2020day5binaryboarding
+Both parts of day 5 puzzle

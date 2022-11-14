@@ -1,6 +1,6 @@
 package com.viware.advent2020day5binaryboarding
 
-import BinaryBoardingPass
+import com.viware.advent2020day5binaryboarding.BinaryBoardingPass
 import org.junit.Assert.assertFalse
 import org.junit.Test
 

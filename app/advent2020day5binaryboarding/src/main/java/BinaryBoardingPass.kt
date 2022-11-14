@@ -1,3 +1,4 @@
+package com.viware.advent2020day5binaryboarding
 
 import kotlin.system.exitProcess
 

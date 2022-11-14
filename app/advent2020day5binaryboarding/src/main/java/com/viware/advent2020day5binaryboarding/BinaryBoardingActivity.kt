@@ -1,14 +1,14 @@
 package com.viware.advent2020day5binaryboarding
 
-import BinaryBoardingPass
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.TextView
 import com.google.android.material.button.MaterialButton
+import com.viware.advent2020day5binaryboarding.R
 import java.io.File
 
-private const val TAG = "ValidPassportActivity"
+private const val TAG = "BinaryBoardingActivity"
 
 class BinaryBoardingActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -22,13 +22,24 @@ class BinaryBoardingActivity : AppCompatActivity() {
             val listOfBoardingPasses:List<String> = file.readLines()
             var highestSeatNumber:Int=0
             var hasValidFields=0
+            val seatsList:MutableList<Int> = mutableListOf()
 
             for(line in listOfBoardingPasses) {
                 val seatNumber= BinaryBoardingPass(line).getSeat()
-                //Log.i(TAG,"In checkButton setOnClickListener lambda, listOfContents[$i]: "+listOfContents[i++]+" "+checkPassword.isOk())
+                //Log.i(TAG,"In checkButton setOnClickListener lambda, seatNumber: "+seatNumber)
+                seatsList.add(seatNumber)
                 if(highestSeatNumber<seatNumber)  highestSeatNumber=seatNumber
             }
-            //Log.i(TAG,"In checkButton setOnClickListener lambda, valid: "+valid)
+            seatsList.sort()
+            var previousSeat=7
+            var currentSeat=7
+            var nextSeat=0
+            seatsList.forEach {
+                previousSeat=currentSeat
+                currentSeat=it
+                if(currentSeat!=previousSeat+1) println("Missing seat: ${currentSeat-1}, previousSeat: $previousSeat")
+            }
+            //Log.i(TAG,"In checkButton setOnClickListener lambda, seatsList: "+seatsList.sort())
 
             findViewById<TextView>(R.id.textView).setText(highestSeatNumber.toString())
 
