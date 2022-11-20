@@ -1,4 +1,4 @@
-package com.viware.advent2020day6handyhaversack
+package com.viware.advent2020day7handyhaversack
 
 import org.junit.Test
 

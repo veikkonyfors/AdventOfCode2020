@@ -1,4 +1,4 @@
-package com.viware.advent2020day6handyhaversack
+package com.viware.advent2020day7handyhaversack
 
 class BagExpander(val listOfBagRuleLines:List<String>) {
     val listOfBagRules:MutableList<String> = mutableListOf()
@@ -36,18 +36,17 @@ class BagExpander(val listOfBagRuleLines:List<String>) {
                 it.color.equals(bagInList.color)
             }
 
-            println("if(subBagToExpand!!.subBagsBagList.size==0) $subBagToExpand")
+            //println("if(subBagToExpand!!.subBagsBagList.size==0) $subBagToExpand")
             if(subBagToExpand!!.subBagsBagList.size==0){
-                println("Adding to listOfExpandedBags if: $it")
+                //println("Adding to listOfExpandedBags if: $it")
                 listOfExpandedBags.add(it)
             }
             else {
                 //val subBagToExpand=Bag(it)
-                println("expand(subBagToExpand).forEach: $subBagToExpand")
+                //println("expand(subBagToExpand).forEach: $subBagToExpand")
                 expand(subBagToExpand).forEach{
-
                }
-                println("Adding to listOfExpandedBags else: $subBagToExpand")
+                //println("Adding to listOfExpandedBags else: $subBagToExpand")
                 listOfExpandedBags.add(subBagToExpand)
             }
         }
