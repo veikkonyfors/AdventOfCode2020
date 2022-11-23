@@ -11,6 +11,7 @@ class HandyHaversackActivityTest {
     private lateinit var listOfBagRuleLines: List<String>
     private lateinit var shorterListOfBagRuleLines: List<String>
     private lateinit var evenShorterListOfBagRuleLines: List<String>
+    private lateinit var shinyGoldTestListOfBagRuleLines: List<String>
 
     @Before
     fun setUp() {
@@ -43,6 +44,17 @@ class HandyHaversackActivityTest {
             "faded blue bags contain no other bags.",
             "dotted black bags contain no other bags.",
         )
+
+        shinyGoldTestListOfBagRuleLines = listOf<String>(
+        "shiny gold bags contain 2 dark red bags.",
+        "dark red bags contain 2 dark orange bags.",
+        "dark orange bags contain 2 dark yellow bags.",
+        "dark yellow bags contain 2 dark green bags.",
+        "dark green bags contain 2 dark blue bags.",
+        "dark blue bags contain 2 dark violet bags.",
+        "dark violet bags contain no other bags.",
+        )
+
 //1 bright white, 1 shiny gold, 1 dark olive, 3 faded blue, 4 dotted black, 2 faded blue
     }
 
@@ -54,14 +66,16 @@ class HandyHaversackActivityTest {
     fun testBagExpander() {
         val bagExpander = BagExpander(listOfBagRuleLines)
         println(bagExpander.listOfBagRules.joinToString(separator = ", "))
-        println("listOfBags: "+bagExpander.listOfBags.joinToString(separator = ", "))
+        println("listOfBags: " + bagExpander.listOfBags.joinToString(separator = ", "))
         val bagToExpand = bagExpander.listOfBags[0]
         println("Expanded: ${bagExpander.expand(bagToExpand).joinToString(",")}")
-        assert(bagExpander.expand(bagToExpand).joinToString(",").startsWith(
-            "Bag: faded blue, ,Bag: dotted black, ,Bag: dark olive, 3 faded blue ,4 dotted black ,Bag: faded blue, ,Bag: dotted black, ,Bag: vibrant plum, 5 faded blue ,6 dotted black ,Bag: shiny gold, 1 dark olive ,2 vibrant plum ,Bag: bright white, 1 shiny gold ,Bag: faded blue, ,Bag: dotted black, ,Bag: dark olive, 3 faded blue ,4 dotted black ,Bag: faded blue, ,Bag: dotted black, ,Bag: vibrant plum, 5 faded blue ,6 dotted black ,Bag: shiny gold, 1 dark olive ,2 vibrant plum ,Bag: faded blue, ,Bag: muted yellow, 2 shiny gold ,9 faded blue ")
-        // This fails for some reason, even if strings seem to be exactly same
-        //assert(bagExpander.expand(bagToExpand).joinToString(",")==
-        //        "Bag: faded blue, ,Bag: dotted black, ,Bag: dark olive, 3 faded blue ,4 dotted black ,Bag: faded blue, ,Bag: dotted black, ,Bag: vibrant plum, 5 faded blue ,6 dotted black ,Bag: shiny gold, 1 dark olive ,2 vibrant plum ,Bag: bright white, 1 shiny gold ,Bag: faded blue, ,Bag: dotted black, ,Bag: dark olive, 3 faded blue ,4 dotted black ,Bag: faded blue, ,Bag: dotted black, ,Bag: vibrant plum, 5 faded blue ,6 dotted black ,Bag: shiny gold, 1 dark olive ,2 vibrant plum ,Bag: faded blue, ,Bag: muted yellow, 2 shiny gold ,9 faded blue "
+        assert(
+            bagExpander.expand(bagToExpand).joinToString(",").startsWith(
+                "Bag: faded blue, ,Bag: dotted black, ,Bag: dark olive, 3 faded blue ,4 dotted black ,Bag: faded blue, ,Bag: dotted black, ,Bag: vibrant plum, 5 faded blue ,6 dotted black ,Bag: shiny gold, 1 dark olive ,2 vibrant plum ,Bag: bright white, 1 shiny gold ,Bag: faded blue, ,Bag: dotted black, ,Bag: dark olive, 3 faded blue ,4 dotted black ,Bag: faded blue, ,Bag: dotted black, ,Bag: vibrant plum, 5 faded blue ,6 dotted black ,Bag: shiny gold, 1 dark olive ,2 vibrant plum ,Bag: faded blue, ,Bag: muted yellow, 2 shiny gold ,9 faded blue "
+            )
+            // This fails for some reason, even if strings seem to be exactly same
+            //assert(bagExpander.expand(bagToExpand).joinToString(",")==
+            //        "Bag: faded blue, ,Bag: dotted black, ,Bag: dark olive, 3 faded blue ,4 dotted black ,Bag: faded blue, ,Bag: dotted black, ,Bag: vibrant plum, 5 faded blue ,6 dotted black ,Bag: shiny gold, 1 dark olive ,2 vibrant plum ,Bag: bright white, 1 shiny gold ,Bag: faded blue, ,Bag: dotted black, ,Bag: dark olive, 3 faded blue ,4 dotted black ,Bag: faded blue, ,Bag: dotted black, ,Bag: vibrant plum, 5 faded blue ,6 dotted black ,Bag: shiny gold, 1 dark olive ,2 vibrant plum ,Bag: faded blue, ,Bag: muted yellow, 2 shiny gold ,9 faded blue "
         )
     }
 
@@ -112,19 +126,103 @@ class HandyHaversackActivityTest {
         println("Expanded bag, color ${bagToExpand.color}: ${bagExpander.expand(bagToExpand).joinToString(", ")}")
         assert(bagExpander.hasShinyGoldBagsInside(bagToExpand))*/
 
-        var numberOfBagsContainingShinyGoldOne=0
+        var numberOfBagsContainingShinyGoldOne = 0
         bagExpander.listOfBags.forEach {
             bagExpander.listOfExpandedBags.clear()
             //println("Expanded bag, color ${it.color}: ${bagExpander.expand(it).joinToString(", ")}")
             //if(it.color!="shiny lime") return@forEach
-            if(bagExpander.hasShinyGoldBagsInside(it)) {
+            if (bagExpander.hasShinyGoldBagsInside(it)) {
                 println("$it has shiny golds")
                 numberOfBagsContainingShinyGoldOne++
             }
         }
         println("numberOfBagsContainingShinyGoldOne: $numberOfBagsContainingShinyGoldOne")
+        assert(numberOfBagsContainingShinyGoldOne==211)
         // 20.11.2022 17:46: 594 is too high
     }
+
+    @Test
+    fun solve2ndPuzzle() {
+        val file = File(
+            "/home/pappa/AndroidStudioProjects/AdventOfCode2020/app/advent2020day7handyhaversack",
+            "bagrules.txt"
+        )
+
+        //bag_rule_5_mirrored_red.txt
+        //bagrules.txt
+        val listOfBagRuleLines: List<String> = file.readLines()
+
+        val bagExpander = BagExpander(listOfBagRuleLines)
+
+        val shinyGoldBag=bagExpander.listOfBags.find{ bagInList ->
+            "drab lime".equals(bagInList.color)
+        }
+
+        val expanded_bags=bagExpander.expand(shinyGoldBag!!)
+        println("Count of bags in ${shinyGoldBag} is ${bagExpander.countOfExpandedBags} or is it ${shinyGoldBag.countOfBags}")
+
+        //assert(${shinyGoldBag.countOfBags}!=0)
+
+        /* First try:
+        That's not the right answer; your answer is too high.
+        If you're stuck, make sure you're using the full input data; there are also some general tips on the about page, or you can ask for hints on the subreddit.
+        Please wait one minute before trying again. (You guessed 35119.) [Return to Day 7]
+
+        Both testCountBags and testShinyGoldBagCount give the right answer: 32 and 126
+         */
+
+        // Try counting them from subBagList
+        bagExpander.countBags("shiny gold").also{
+            println("shiny gold has $it subBags")
+        }
+
+    }
+
+    @Test
+    fun testCountBags(){
+    /*
+        Test case from the puzzle page. Counted right.
+     */
+        val bagExpander = BagExpander(listOfBagRuleLines)
+
+        val shinyGoldBag=bagExpander.listOfBags.find{ bagInList ->
+            "shiny gold".equals(bagInList.color)
+        }
+
+        val expanded_bags=bagExpander.expand(shinyGoldBag!!)
+        println("Count of bags in ${shinyGoldBag} is ${bagExpander.countOfExpandedBags} or is it ${shinyGoldBag.countOfBags}")
+
+        assert(shinyGoldBag!!.countOfBags==32)
+    }
+
+    @Test
+    fun testShinyGoldBagCount(){
+
+        /* From the puzzle. This is counted correctly here.
+        Here's another example:
+shiny gold bags contain 2 dark red bags.
+dark red bags contain 2 dark orange bags.
+dark orange bags contain 2 dark yellow bags.
+dark yellow bags contain 2 dark green bags.
+dark green bags contain 2 dark blue bags.
+dark blue bags contain 2 dark violet bags.
+dark violet bags contain no other bags.
+In this example, a single shiny gold bag must contain 126 other bags.
+         */
+
+        val bagExpander = BagExpander(shinyGoldTestListOfBagRuleLines)
+
+        val shinyGoldBag=bagExpander.listOfBags.find{ bagInList ->
+            "shiny gold".equals(bagInList.color)
+        }
+
+        val expanded_bags=bagExpander.expand(shinyGoldBag!!)
+        println("Count of bags in ${shinyGoldBag} is ${bagExpander.countOfExpandedBags} or is it ${shinyGoldBag.countOfBags}")
+
+        assert(shinyGoldBag.countOfBags==126)
+    }
+
+
 }
 
 

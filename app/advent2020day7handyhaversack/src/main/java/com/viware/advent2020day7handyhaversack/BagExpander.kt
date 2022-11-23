@@ -1,10 +1,13 @@
 package com.viware.advent2020day7handyhaversack
 
+import org.jetbrains.annotations.TestOnly
+
 class BagExpander(val listOfBagRuleLines:List<String>) {
     val listOfBagRules:MutableList<String> = mutableListOf()
     val listOfBags:MutableList<Bag> = mutableListOf()
     val listOfExpandedBags:MutableList<Bag> = mutableListOf()
     lateinit var trimmedRule:String
+    var countOfExpandedBags=0
 
     init{
         listOfBagRuleLines.forEach(){
@@ -28,8 +31,6 @@ class BagExpander(val listOfBagRuleLines:List<String>) {
 
     fun expand(_bagToExpand:Bag):List<Bag>{
 
-        //listOfExpandedBags.clear()
-
         _bagToExpand.subBagsBagList.forEach{
 
             val subBagToExpand=listOfBags.find{ bagInList ->
@@ -38,18 +39,25 @@ class BagExpander(val listOfBagRuleLines:List<String>) {
 
             //println("if(subBagToExpand!!.subBagsBagList.size==0) $subBagToExpand")
             if(subBagToExpand!!.subBagsBagList.size==0){
-                //println("Adding to listOfExpandedBags if: $it")
-                listOfExpandedBags.add(it)
+                //listOfExpandedBags.add(subBagToExpand)
+                subBagToExpand.countOfBags=1
+                //_bagToExpand.countOfBags+=subBagToExpand.countOfBags*_bagToExpand.countOfSubBags(it.color)
+//                println("Added to listOfExpandedBags if: $subBagToExpand, countOfBags: ${subBagToExpand.countOfBags}")
+                //println("(if) _bagToExpand.countOfBags: ${_bagToExpand.rule}: countOfBags=${_bagToExpand.countOfBags}")
             }
             else {
-                //val subBagToExpand=Bag(it)
-                //println("expand(subBagToExpand).forEach: $subBagToExpand")
-                expand(subBagToExpand).forEach{
-               }
-                //println("Adding to listOfExpandedBags else: $subBagToExpand")
-                listOfExpandedBags.add(subBagToExpand)
+                expand(subBagToExpand)
+                //listOfExpandedBags.add(subBagToExpand)
+                //_bagToExpand.countOfBags+=subBagToExpand.countOfBags*_bagToExpand.countOfSubBags(it.color) // SubBags in this SubBag
+                _bagToExpand.countOfBags+=_bagToExpand.countOfSubBags(it.color) // SubBag itself/themselves
+                //println("Added to listOfExpandedBags else: $subBagToExpand, countOfBags: ${subBagToExpand.countOfBags}")
+                //println("(else)_bagToExpand.countOfBags: ${_bagToExpand.rule}: countOfBags=${_bagToExpand.countOfBags}")
             }
+            listOfExpandedBags.add(subBagToExpand)
+            _bagToExpand.countOfBags+=subBagToExpand.countOfBags*_bagToExpand.countOfSubBags(it.color) // SubBags in this SubBag
+            println("_bagToExpand.countOfBags: ${_bagToExpand.rule}: countOfBags=${_bagToExpand.countOfBags}")
         }
+        countOfExpandedBags=_bagToExpand.countOfBags
         return listOfExpandedBags
     }
 
@@ -59,6 +67,22 @@ class BagExpander(val listOfBagRuleLines:List<String>) {
             if(it.color=="shiny gold") return true
         }
         return false
+    }
+
+    fun countBags(_color:String):Int{
+
+        val shinyGoldBag=listOfBags.find{ bagInList ->
+            _color.equals(bagInList.color)
+        }
+
+        val expandedBags=expand(shinyGoldBag!!)
+        var countOfBags=0
+        expandedBags.forEach{
+            countOfBags+=it.countOfBags
+            println("$it, holding ${it.countOfBags} bags, adds up to $countOfBags so far in ${shinyGoldBag.color}")
+        }
+
+        return countOfBags
     }
 
 }
