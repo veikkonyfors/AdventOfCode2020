@@ -31,6 +31,16 @@ class BagExpander(val listOfBagRuleLines:List<String>) {
 
     fun expand(_bagToExpand:Bag):List<Bag>{
 
+
+        //Without this, numberOfBagsContainingShinyGoldOne: 211, which was the correct answer for 1st puzzle.
+        // 24.11.2022: Do not count twice mod applied.
+        ///*
+        if(_bagToExpand.countOfBags!=0){
+            //println("$_bagToExpand already expanded, countOfBags: ${_bagToExpand.countOfBags}")
+            return listOfBags
+        }
+        //*/
+
         _bagToExpand.subBagsBagList.forEach{
 
             val subBagToExpand=listOfBags.find{ bagInList ->
@@ -55,7 +65,7 @@ class BagExpander(val listOfBagRuleLines:List<String>) {
             }
             listOfExpandedBags.add(subBagToExpand)
             _bagToExpand.countOfBags+=subBagToExpand.countOfBags*_bagToExpand.countOfSubBags(it.color) // SubBags in this SubBag
-            println("_bagToExpand.countOfBags: ${_bagToExpand.rule}: countOfBags=${_bagToExpand.countOfBags}")
+            //println("_bagToExpand.countOfBags: ${_bagToExpand.rule}: countOfBags=${_bagToExpand.countOfBags}")
         }
         countOfExpandedBags=_bagToExpand.countOfBags
         return listOfExpandedBags

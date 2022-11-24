@@ -12,6 +12,8 @@ class HandyHaversackActivityTest {
     private lateinit var shorterListOfBagRuleLines: List<String>
     private lateinit var evenShorterListOfBagRuleLines: List<String>
     private lateinit var shinyGoldTestListOfBagRuleLines: List<String>
+    private lateinit var listOfBagRuleLinesDarkOliveWithVibrantPlum: List<String>
+
 
     @Before
     fun setUp() {
@@ -155,7 +157,7 @@ class HandyHaversackActivityTest {
         val bagExpander = BagExpander(listOfBagRuleLines)
 
         val shinyGoldBag=bagExpander.listOfBags.find{ bagInList ->
-            "drab lime".equals(bagInList.color)
+            "shiny gold".equals(bagInList.color)
         }
 
         val expanded_bags=bagExpander.expand(shinyGoldBag!!)
@@ -170,11 +172,32 @@ class HandyHaversackActivityTest {
 
         Both testCountBags and testShinyGoldBagCount give the right answer: 32 and 126
          */
+        /* 24.11.2022, morning: Do not count twice mod applied.
+        That's not the right answer; your answer is too high.
+        If you're stuck, make sure you're using the full input data; there are also some general tips on the about page, or you can ask for hints on the subreddit.
+        Please wait one minute before trying again. (You guessed 15751.) [Return to Day 7]
+        This was from the 'shiny gold has 15751 subBags' i.e. counted with countbags method.
+        Commented that out now from below there.
+
+        17:00 ->
+        Count of bags in Bag: drab lime, 1 mirrored green ,5 clear lime ,3 posh yellow ,5 pale yellow  is 1417 or is it 1417
+        That's not the right answer; your answer is too low.
+        If you're stuck, make sure you're using the full input data; there are also some general tips on the about page, or you can ask for hints on the subreddit.
+        Was wrong colour in test.!!!!
+        Please wait one minute before trying again. (You guessed 1417.) [Return to Day 7]
+
+        Count of bags in Bag: shiny gold, 1 dull white ,4 dark orange  is 12414 or is it 12414
+        That's the right answer! You are one gold star closer to saving your vacation.
+
+        You have completed Day 7! You can [Share] this victory or [Return to Your Advent Calendar].
+         */
 
         // Try counting them from subBagList
+        /*
         bagExpander.countBags("shiny gold").also{
             println("shiny gold has $it subBags")
         }
+        */
 
     }
 
@@ -222,6 +245,36 @@ In this example, a single shiny gold bag must contain 126 other bags.
         assert(shinyGoldBag.countOfBags==126)
     }
 
+    @Test
+    fun testShinyGoldBagCountDarkOliveWithVibrantPlum(){
+
+        /* Add vibrant plum bag to dark olive. Just to test bag doesn't get expanded twice.
+        Should count to 44
+         */
+
+        listOfBagRuleLinesDarkOliveWithVibrantPlum = listOf<String>(
+            "light red bags contain 1 bright white bag, 2 muted yellow bags.",
+            "dark orange bags contain 3 bright white bags, 4 muted yellow bags.",
+            "bright white bags contain 1 shiny gold bag.",
+            "muted yellow bags contain 2 shiny gold bags, 9 faded blue bags.",
+            "shiny gold bags contain 1 dark olive bag, 2 vibrant plum bags.",
+            "dark olive bags contain 3 faded blue bags, 4 dotted black bags, 1 vibrant plum bag.",
+//            "dark olive bags contain 3 faded blue bags, 4 dotted black bag.",
+            "vibrant plum bags contain 5 faded blue bags, 6 dotted black bags.",
+            "faded blue bags contain no other bags.",
+            "dotted black bags contain no other bags.",
+        )
+        val bagExpander = BagExpander(listOfBagRuleLinesDarkOliveWithVibrantPlum)
+
+        val shinyGoldBag=bagExpander.listOfBags.find{ bagInList ->
+            "shiny gold".equals(bagInList.color)
+        }
+
+        val expanded_bags=bagExpander.expand(shinyGoldBag!!)
+        println("Count of bags in ${shinyGoldBag} is ${bagExpander.countOfExpandedBags} or is it ${shinyGoldBag.countOfBags}")
+
+        assert(shinyGoldBag.countOfBags==44)
+    }
 
 }
 

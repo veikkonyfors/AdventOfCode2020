@@ -27,6 +27,7 @@ class HandyHaversackActivity : AppCompatActivity() {
 
             val bagExpander = BagExpander(listOfBagRuleLines)
 
+            // 1st puzzle
             var numberOfBagsContainingShinyGoldOne=0
             bagExpander.listOfBags.forEach {
                 bagExpander.listOfExpandedBags.clear()
@@ -34,9 +35,16 @@ class HandyHaversackActivity : AppCompatActivity() {
                     numberOfBagsContainingShinyGoldOne++
                 }
             }
-
             findViewById<TextView>(R.id.textView).setText(numberOfBagsContainingShinyGoldOne.toString())
 
+            // 2ndpuzzle
+            val shinyGoldBag=bagExpander.listOfBags.find{ bagInList ->
+                "shiny gold".equals(bagInList.color)
+            }
+
+            val expanded_bags=bagExpander.expand(shinyGoldBag!!)
+            findViewById<TextView>(R.id.textView2).setText(shinyGoldBag.countOfBags.toString())
+            println("Count of bags in ${shinyGoldBag} is ${shinyGoldBag.countOfBags}")
 
         }
     }
