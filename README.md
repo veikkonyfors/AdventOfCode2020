@@ -27,3 +27,6 @@ Both parts of day 4 puzzle
 
 ### advent2020day5binaryboarding
 Both parts of day 5 puzzle
+
+### advent2020day6handyhaversack
+Both parts of day 6 puzzle

@@ -1,4 +1,4 @@
-package com.viware.advent2020day7handyhaversack
+package com.viware.advent2020day6handyhaversack
 
 class Bag constructor (val rule:String){
     val color:String

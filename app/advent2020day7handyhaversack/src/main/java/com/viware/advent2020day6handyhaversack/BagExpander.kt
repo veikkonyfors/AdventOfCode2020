@@ -1,6 +1,4 @@
-package com.viware.advent2020day7handyhaversack
-
-import org.jetbrains.annotations.TestOnly
+package com.viware.advent2020day6handyhaversack
 
 class BagExpander(val listOfBagRuleLines:List<String>) {
     val listOfBagRules:MutableList<String> = mutableListOf()

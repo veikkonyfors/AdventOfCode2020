@@ -1,4 +1,4 @@
-package com.viware.advent2020day7handyhaversack
+package com.viware.advent2020day6handyhaversack
 
 import org.junit.After
 import org.junit.Assert.assertFalse
@@ -67,19 +67,18 @@ class HandyHaversackActivityTest {
     @Test
     fun testBagExpander() {
         val bagExpander = BagExpander(listOfBagRuleLines)
-        println(bagExpander.listOfBagRules.joinToString(separator = ", "))
-        println("listOfBags: " + bagExpander.listOfBags.joinToString(separator = ", "))
+        //println(bagExpander.listOfBagRules.joinToString(separator = ", "))
+        //println("listOfBags: " + bagExpander.listOfBags.joinToString(separator = ", "))
         val bagToExpand = bagExpander.listOfBags[0]
-        println("Expanded: ${bagExpander.expand(bagToExpand).joinToString(",")}")
-        assert(
-            bagExpander.expand(bagToExpand).joinToString(",").startsWith(
-                "Bag: faded blue, ,Bag: dotted black, ,Bag: dark olive, 3 faded blue ,4 dotted black ,Bag: faded blue, ,Bag: dotted black, ,Bag: vibrant plum, 5 faded blue ,6 dotted black ,Bag: shiny gold, 1 dark olive ,2 vibrant plum ,Bag: bright white, 1 shiny gold ,Bag: faded blue, ,Bag: dotted black, ,Bag: dark olive, 3 faded blue ,4 dotted black ,Bag: faded blue, ,Bag: dotted black, ,Bag: vibrant plum, 5 faded blue ,6 dotted black ,Bag: shiny gold, 1 dark olive ,2 vibrant plum ,Bag: faded blue, ,Bag: muted yellow, 2 shiny gold ,9 faded blue "
-            )
-            // This fails for some reason, even if strings seem to be exactly same
-            //assert(bagExpander.expand(bagToExpand).joinToString(",")==
-            //        "Bag: faded blue, ,Bag: dotted black, ,Bag: dark olive, 3 faded blue ,4 dotted black ,Bag: faded blue, ,Bag: dotted black, ,Bag: vibrant plum, 5 faded blue ,6 dotted black ,Bag: shiny gold, 1 dark olive ,2 vibrant plum ,Bag: bright white, 1 shiny gold ,Bag: faded blue, ,Bag: dotted black, ,Bag: dark olive, 3 faded blue ,4 dotted black ,Bag: faded blue, ,Bag: dotted black, ,Bag: vibrant plum, 5 faded blue ,6 dotted black ,Bag: shiny gold, 1 dark olive ,2 vibrant plum ,Bag: faded blue, ,Bag: muted yellow, 2 shiny gold ,9 faded blue "
+        //println("Expanded: ${bagExpander.expand(bagToExpand).joinToString(",")}")
+        assert(bagExpander.expand(bagToExpand).joinToString(",").startsWith(
+            "Bag: faded blue, ,Bag: dotted black, ,Bag: dark olive, 3 faded blue ,4 dotted black ,Bag: faded blue, ,Bag: dotted black, ,Bag: vibrant plum, 5 faded blue ,6 dotted black ,Bag: shiny gold, 1 dark olive ,2 vibrant plum ,Bag: bright white, 1 shiny gold ,Bag: shiny gold, 1 dark olive ,2 vibrant plum ,Bag: faded blue, ,Bag: muted yellow, 2 shiny gold ,9 faded blue")
         )
-    }
+        // This fails for some reason, even if strings seem to be exactly same
+        //assert(bagExpander.expand(bagToExpand).joinToString(",")==
+        //          "Bag: faded blue, ,Bag: dotted black, ,Bag: dark olive, 3 faded blue ,4 dotted black ,Bag: faded blue, ,Bag: dotted black, ,Bag: vibrant plum, 5 faded blue ,6 dotted black ,Bag: shiny gold, 1 dark olive ,2 vibrant plum ,Bag: bright white, 1 shiny gold ,Bag: shiny gold, 1 dark olive ,2 vibrant plum ,Bag: faded blue, ,Bag: muted yellow, 2 shiny gold ,9 faded blue"
+        //)
+}
 
     @Test
     fun testBagForShinyGold() {
@@ -87,22 +86,29 @@ class HandyHaversackActivityTest {
         val bagToExpand = bagExpander.listOfBags[0] // light red
         assert(bagExpander.hasShinyGoldBagsInside(bagToExpand))
         bagExpander.listOfExpandedBags.clear()
+        //bagExpander.listOfBags[1].countOfBags=0
         assert(bagExpander.hasShinyGoldBagsInside(bagExpander.listOfBags[1])) // dark orange
         bagExpander.listOfExpandedBags.clear()
+        //bagExpander.listOfBags[2].countOfBags=0
         assert(bagExpander.hasShinyGoldBagsInside(bagExpander.listOfBags[2])) // bright white
         bagExpander.listOfExpandedBags.clear()
+        bagExpander.listOfBags[3].countOfBags=0
         assert(bagExpander.hasShinyGoldBagsInside(bagExpander.listOfBags[3])) // muted yellow
         //println("Expanded listOfBags[5], color  ${bagExpander.listOfBags[4].color}: ${bagExpander.expand(bagExpander.listOfBags[4]).joinToString(",")}")
         bagExpander.listOfExpandedBags.clear()
+        bagExpander.listOfBags[4].countOfBags=0
         assertFalse(bagExpander.hasShinyGoldBagsInside(bagExpander.listOfBags[4])) // shiny gold
-        //assertFalse(bagExpander.hasShinyGoldBagsInside(bagExpander.listOfBags[4]))
         bagExpander.listOfExpandedBags.clear()
+        bagExpander.listOfBags[5].countOfBags=0
         assertFalse(bagExpander.hasShinyGoldBagsInside(bagExpander.listOfBags[5]))
         bagExpander.listOfExpandedBags.clear()
+        bagExpander.listOfBags[6].countOfBags=0
         assertFalse(bagExpander.hasShinyGoldBagsInside(bagExpander.listOfBags[6]))
         bagExpander.listOfExpandedBags.clear()
+        bagExpander.listOfBags[7].countOfBags=0
         assertFalse(bagExpander.hasShinyGoldBagsInside(bagExpander.listOfBags[7]))
         bagExpander.listOfExpandedBags.clear()
+        bagExpander.listOfBags[8].countOfBags=0
         assertFalse(bagExpander.hasShinyGoldBagsInside(bagExpander.listOfBags[8]))
     }
 
@@ -163,7 +169,7 @@ class HandyHaversackActivityTest {
         val expanded_bags=bagExpander.expand(shinyGoldBag!!)
         println("Count of bags in ${shinyGoldBag} is ${bagExpander.countOfExpandedBags} or is it ${shinyGoldBag.countOfBags}")
 
-        //assert(${shinyGoldBag.countOfBags}!=0)
+        assert(shinyGoldBag.countOfBags==12414)
 
         /* First try:
         That's not the right answer; your answer is too high.

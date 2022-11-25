@@ -1,4 +1,4 @@
-package com.viware.advent2020day7handyhaversack
+package com.viware.advent2020day6handyhaversack
 
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.ext.junit.runners.AndroidJUnit4

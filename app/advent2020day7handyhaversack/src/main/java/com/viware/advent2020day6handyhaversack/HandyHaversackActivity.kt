@@ -1,8 +1,7 @@
-package com.viware.advent2020day7handyhaversack
+package com.viware.advent2020day6handyhaversack
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.widget.TextView
 import com.google.android.material.button.MaterialButton
 import com.viware.advent2020day7handyhaversack.R
