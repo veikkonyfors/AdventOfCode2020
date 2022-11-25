@@ -1,5 +1,11 @@
 package com.viware.advent2020day6handyhaversack
 
+/**
+ * BagExpander, handles given bagrules.
+ * When instantiated with the list of bagrules, creates listOfBagRules and listOfBags,
+ * containing trimmed rule line containing the essentials
+ */
+
 class BagExpander(val listOfBagRuleLines:List<String>) {
     val listOfBagRules:MutableList<String> = mutableListOf()
     val listOfBags:MutableList<Bag> = mutableListOf()
@@ -27,6 +33,10 @@ class BagExpander(val listOfBagRuleLines:List<String>) {
 
     }
 
+    /**
+     * Expands listOfBags subbags into  listOfExpandedBags
+     * Bags in listOfBags will get their countOfBags property updated to number of subBags in this bag.
+     */
     fun expand(_bagToExpand:Bag):List<Bag>{
 
 
@@ -69,7 +79,17 @@ class BagExpander(val listOfBagRuleLines:List<String>) {
         return listOfExpandedBags
     }
 
+    /**
+     * Expands the given bag and test whether "shiny gold" one is found.
+     * Before expanding, BagExpander object needs to be reset, i.e.
+     * - listOfExpandedBags cleared and
+     * - for all bags in listOfBags it's countOfBags will be set to zero.
+     * That's is due to the unfortunate case, that counting bags for each bag in listOfBags
+     * is carried out at the same time of expanding.
+     * Expanding and counting of bags should had been implemented distinctly to start with.
+     */
     fun hasShinyGoldBagsInside(_bag:Bag):Boolean{
+        reset()
         var bagsInside=expand(_bag)
         bagsInside.forEach{
             if(it.color=="shiny gold") return true
@@ -91,6 +111,14 @@ class BagExpander(val listOfBagRuleLines:List<String>) {
         }
 
         return countOfBags
+    }
+
+    fun reset(){
+        listOfExpandedBags.clear() // ?
+        listOfBags.forEach{
+            it.countOfBags=0  // for expand() to process this bag
+        }
+
     }
 
 }

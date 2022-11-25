@@ -4,7 +4,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.TextView
 import com.google.android.material.button.MaterialButton
-import com.viware.advent2020day7handyhaversack.R
+import com.viware.advent2020day6handyhaversack.R
 import java.io.File
 
 private const val TAG = "HandyHaversackActivity"

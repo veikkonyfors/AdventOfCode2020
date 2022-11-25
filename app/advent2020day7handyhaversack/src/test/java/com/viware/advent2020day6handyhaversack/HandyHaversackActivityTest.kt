@@ -83,32 +83,25 @@ class HandyHaversackActivityTest {
     @Test
     fun testBagForShinyGold() {
         val bagExpander = BagExpander(listOfBagRuleLines)
+
         val bagToExpand = bagExpander.listOfBags[0] // light red
         assert(bagExpander.hasShinyGoldBagsInside(bagToExpand))
-        bagExpander.listOfExpandedBags.clear()
-        //bagExpander.listOfBags[1].countOfBags=0
+        //bagExpander.reset()
         assert(bagExpander.hasShinyGoldBagsInside(bagExpander.listOfBags[1])) // dark orange
-        bagExpander.listOfExpandedBags.clear()
-        //bagExpander.listOfBags[2].countOfBags=0
+        //bagExpander.reset()
         assert(bagExpander.hasShinyGoldBagsInside(bagExpander.listOfBags[2])) // bright white
-        bagExpander.listOfExpandedBags.clear()
-        bagExpander.listOfBags[3].countOfBags=0
+        //bagExpander.reset()
         assert(bagExpander.hasShinyGoldBagsInside(bagExpander.listOfBags[3])) // muted yellow
         //println("Expanded listOfBags[5], color  ${bagExpander.listOfBags[4].color}: ${bagExpander.expand(bagExpander.listOfBags[4]).joinToString(",")}")
-        bagExpander.listOfExpandedBags.clear()
-        bagExpander.listOfBags[4].countOfBags=0
+        //bagExpander.reset()
         assertFalse(bagExpander.hasShinyGoldBagsInside(bagExpander.listOfBags[4])) // shiny gold
-        bagExpander.listOfExpandedBags.clear()
-        bagExpander.listOfBags[5].countOfBags=0
+        //bagExpander.reset()
         assertFalse(bagExpander.hasShinyGoldBagsInside(bagExpander.listOfBags[5]))
-        bagExpander.listOfExpandedBags.clear()
-        bagExpander.listOfBags[6].countOfBags=0
+        //bagExpander.reset()
         assertFalse(bagExpander.hasShinyGoldBagsInside(bagExpander.listOfBags[6]))
-        bagExpander.listOfExpandedBags.clear()
-        bagExpander.listOfBags[7].countOfBags=0
+        //bagExpander.reset()
         assertFalse(bagExpander.hasShinyGoldBagsInside(bagExpander.listOfBags[7]))
-        bagExpander.listOfExpandedBags.clear()
-        bagExpander.listOfBags[8].countOfBags=0
+        //bagExpander.reset()
         assertFalse(bagExpander.hasShinyGoldBagsInside(bagExpander.listOfBags[8]))
     }
 
@@ -136,7 +129,7 @@ class HandyHaversackActivityTest {
 
         var numberOfBagsContainingShinyGoldOne = 0
         bagExpander.listOfBags.forEach {
-            bagExpander.listOfExpandedBags.clear()
+            bagExpander.reset()
             //println("Expanded bag, color ${it.color}: ${bagExpander.expand(it).joinToString(", ")}")
             //if(it.color!="shiny lime") return@forEach
             if (bagExpander.hasShinyGoldBagsInside(it)) {
