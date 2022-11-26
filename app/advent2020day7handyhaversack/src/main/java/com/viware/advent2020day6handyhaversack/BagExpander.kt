@@ -8,7 +8,7 @@ package com.viware.advent2020day6handyhaversack
 
 class BagExpander(val listOfBagRuleLines:List<String>) {
     val listOfBagRules:MutableList<String> = mutableListOf()
-    val listOfBags:MutableList<Bag> = mutableListOf()
+    val listOfBags:MutableList<Bag> = mutableListOf() // all bags like 'shiny lime |3 muted magenta |3 clear cyan'
     val listOfExpandedBags:MutableList<Bag> = mutableListOf()
     lateinit var trimmedRule:String
     var countOfExpandedBags=0
@@ -42,6 +42,13 @@ class BagExpander(val listOfBagRuleLines:List<String>) {
 
         //Without this, numberOfBagsContainingShinyGoldOne: 211, which was the correct answer for 1st puzzle.
         // 24.11.2022: Do not count twice mod applied.
+        // This had to be inserted for the second puzzle, how many bags gold shiny one holds.
+        // Unfortunately it meshed up the first puzzle, as some of the bags remained unexpanded.
+        // Solution was to call reset() before each individual bag expansion.
+        // 1st puzzle, iterate through all the bags in listOfBags and call hasShinyGoldBagsInside,
+        // Which in turn expands this bag and checks, whether it has shiny gold one inside.
+        // If reset() was not called, expand() returned previous listOfBags, which meshed up
+        // counting.
         ///*
         if(_bagToExpand.countOfBags!=0){
             //println("$_bagToExpand already expanded, countOfBags: ${_bagToExpand.countOfBags}")

@@ -29,4 +29,4 @@ Both parts of day 4 puzzle
 Both parts of day 5 puzzle
 
 ### advent2020day6handyhaversack
-Both parts of day 6 puzzle
+Both parts of day 7 puzzle
