@@ -64,4 +64,25 @@ class CustomCustomsTest {
         println(allAnswers.countAnswers())
         assert(allAnswers.countAnswers().equals(6885))
     }
+
+    @Test
+    fun testCountUniqueYesAnswers(){
+        val allAnswers:AllAnswers= AllAnswers(listOfAnswerLines)
+        println(allAnswers.countUniqYesAnswers())
+        assert(allAnswers.countUniqYesAnswers().equals(6))
+    }
+
+    @Test
+    fun testPuzzle2Answer(){
+
+        val file = File(
+            "/home/pappa/AndroidStudioProjects/AdventOfCode2020/app/advent2020day6customcustoms",
+            "answerlines.txt"
+        )
+
+        val listOfAnswerLines: List<String> = file.readLines()
+        val allAnswers:AllAnswers= AllAnswers(listOfAnswerLines)
+        println(allAnswers.countUniqYesAnswers())
+        assert(allAnswers.countUniqYesAnswers().equals(3550))
+    }
 }

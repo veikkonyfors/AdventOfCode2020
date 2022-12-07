@@ -8,9 +8,8 @@ class AllAnswers constructor (val listOfAnswerLines:List<String>){
 
     init{
         listOfAnswerLines.forEach {
-            if (it.length == 0) { listOfAnswers.add(answer); answer=Answer()
-            }
-            answer.add(it)
+            if (it.length == 0) { listOfAnswers.add(answer); answer=Answer() }
+            else answer.add(it)
         }
         if(!listOfAnswers.contains(answer)) listOfAnswers.add(answer)
     }
@@ -19,6 +18,14 @@ class AllAnswers constructor (val listOfAnswerLines:List<String>){
         var count=0
         listOfAnswers.forEach{
             count+=it.answeredQuestions.length
+        }
+        return count
+    }
+
+    fun countUniqYesAnswers():Int{
+        var count=0
+        listOfAnswers.forEach{
+            count+=it.uniqYesAnswers.length
         }
         return count
     }
