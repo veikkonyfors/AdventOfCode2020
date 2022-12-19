@@ -28,6 +28,9 @@ Both parts of day 4 puzzle
 ### advent2020day5binaryboarding
 Both parts of day 5 puzzle
 
-### advent2020day6handyhaversack
+### advent2020day6customcustoms
+Both parts of day 6 puzzle
+
+### advent2020day7handyhaversack
 Both parts of day 7 puzzle.
-Accidentally took this initially as day6 puzzle, thus the confusion with package.
+Accidentally took this initially as day6 puzzle, thus some confusion with package.
