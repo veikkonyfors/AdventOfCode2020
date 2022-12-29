@@ -24,7 +24,7 @@ class CustomCustomsFragment : Fragment() {
     private lateinit var viewModel: CustomCustomsMainViewModel
 
     // Binding object instance with access to the views in the game_fragment.xml layout
-    //private lateinit var binding: CustomCustomsFragmentBinding
+    // private lateinit var binding: CustomCustomsFragmentBinding
     // Uudemmassatavassa pitäisi saada jotenkin buildattua toi CustomCustomsFragmentBinding
 
     override fun onCreateView(
