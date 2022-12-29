@@ -15,7 +15,11 @@ class CustomCustomsMainViewModel(application: Application) : AndroidViewModel(ap
     // TODO: Implement the ViewModel
 
     // Tiedoston sojotus menee eri lailla activityssa, fragmentissa ja modelissa:
+    // Ativity:?
     //private val file = File(getActivity().getApplicationContext().filesDir,"answerlines.txt")
+    // muunnettuna property accees syntaksiin, kuten AOC2022_AndroidKotlin day12hillclimbing koodissa:
+    // val file = File(activity?.applicationContext.filesDir ,"input_test"
+    // Fragment:?
     //val file = File(requireActivity().application.filesDir,"answerlines.txt")
     // Kaikissa toimii hard koodattuna
     //private val file = File("/data/user/0/fi.viware.advent2020day6customcustoms/files","answerlines.txt"    )
